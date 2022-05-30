@@ -39,6 +39,7 @@ class FlutterMentions extends StatefulWidget {
     this.cursorWidth = 2.0,
     this.cursorRadius,
     this.cursorColor,
+    this.backgroundColor,
     this.keyboardAppearance,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.enableInteractiveSelection = true,
@@ -199,6 +200,9 @@ class FlutterMentions extends StatefulWidget {
   /// Defaults to [ThemeData.cursorColor] or [CupertinoTheme.primaryColor]
   /// depending on [ThemeData.platform] .
   final Color? cursorColor;
+
+  /// The color to use to painting background color.
+  final Color? backgroundColor;
 
   /// The appearance of the keyboard.
   ///

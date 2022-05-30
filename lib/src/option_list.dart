@@ -7,6 +7,7 @@ class OptionList extends StatelessWidget {
     required this.suggestionListHeight,
     this.suggestionBuilder,
     this.suggestionListDecoration,
+    this.backgroundColor,
   });
 
   final Widget Function(Map<String, dynamic>)? suggestionBuilder;
@@ -18,6 +19,8 @@ class OptionList extends StatelessWidget {
   final double suggestionListHeight;
 
   final BoxDecoration? suggestionListDecoration;
+
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +43,15 @@ class OptionList extends StatelessWidget {
                   child: suggestionBuilder != null
                       ? suggestionBuilder!(data[index])
                       : Container(
-                          color: Colors.blue,
+                          color: backgroundColor ?? Colors.blue,
                           padding: EdgeInsets.all(20.0),
-                          child: Text(
-                            data[index]['display'],
-                            style: TextStyle(fontSize: 12),
+                          child: Row(
+                            children: [
+                              Text(
+                                data[index]['display'],
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ],
                           ),
                         ),
                 );
