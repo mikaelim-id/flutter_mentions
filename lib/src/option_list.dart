@@ -8,6 +8,8 @@ class OptionList extends StatelessWidget {
     this.suggestionBuilder,
     this.suggestionListDecoration,
     this.backgroundColor,
+    this.optionTextStyle,
+    this.imageBuilder,
   });
 
   final Widget Function(Map<String, dynamic>)? suggestionBuilder;
@@ -22,6 +24,10 @@ class OptionList extends StatelessWidget {
 
   final Color? backgroundColor;
 
+  final TextStyle? optionTextStyle;
+
+  final Widget Function(String imageURL, String initial)? imageBuilder;
+
   @override
   Widget build(BuildContext context) {
     return data.isNotEmpty
@@ -32,6 +38,7 @@ class OptionList extends StatelessWidget {
               maxHeight: suggestionListHeight,
               minHeight: 0,
             ),
+            margin: EdgeInsets.only(bottom: 10),
             child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,
@@ -44,12 +51,18 @@ class OptionList extends StatelessWidget {
                       ? suggestionBuilder!(data[index])
                       : Container(
                           color: backgroundColor ?? Colors.blue,
-                          padding: EdgeInsets.all(20.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
+                              imageBuilder != null
+                                  ? imageBuilder!(data[index]['image_url'],
+                                      data[index]['initial'])
+                                  : SizedBox(),
                               Text(
                                 data[index]['display'],
-                                style: TextStyle(fontSize: 12),
+                                style:
+                                    optionTextStyle ?? TextStyle(fontSize: 12),
                               ),
                             ],
                           ),

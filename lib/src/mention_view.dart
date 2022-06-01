@@ -40,6 +40,8 @@ class FlutterMentions extends StatefulWidget {
     this.cursorRadius,
     this.cursorColor,
     this.backgroundColor,
+    this.imageBuilder,
+    this.optionTextStyle,
     this.keyboardAppearance,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.enableInteractiveSelection = true,
@@ -203,6 +205,11 @@ class FlutterMentions extends StatefulWidget {
 
   /// The color to use to painting background color.
   final Color? backgroundColor;
+
+  /// The color to use to painting options text color.
+  final TextStyle? optionTextStyle;
+
+  final Widget Function(String imageURL, String initial)? imageBuilder;
 
   /// The appearance of the keyboard.
   ///
@@ -429,6 +436,8 @@ class FlutterMentionsState extends State<FlutterMentions> {
             return show && !widget.hideSuggestionList
                 ? OptionList(
                     backgroundColor: widget.backgroundColor,
+                    optionTextStyle: widget.optionTextStyle,
+                    imageBuilder: widget.imageBuilder,
                     suggestionListHeight: widget.suggestionListHeight,
                     suggestionBuilder: list.suggestionBuilder,
                     suggestionListDecoration: widget.suggestionListDecoration,
