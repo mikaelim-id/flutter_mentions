@@ -330,7 +330,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
         TextSelection.fromPosition(TextPosition(offset: nextCursorPosition));
   }
 
-  void suggestionListerner() {
+  void suggestionListener() {
     final cursorPos = controller!.selection.baseOffset;
 
     if (cursorPos >= 0) {
@@ -392,7 +392,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     }
 
     // setup a listener to figure out which suggestions to show based on the trigger
-    controller!.addListener(suggestionListerner);
+    controller!.addListener(suggestionListener);
 
     controller!.addListener(inputListeners);
 
@@ -401,7 +401,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
   @override
   void dispose() {
-    controller!.removeListener(suggestionListerner);
+    controller!.removeListener(suggestionListener);
     controller!.removeListener(inputListeners);
 
     super.dispose();
@@ -448,7 +448,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
                           .replaceAll(RegExp(_pattern), '');
 
                       return ele == str ? false : ele.contains(str);
-                    }).toList(),
+                    }).toList().reversed.toList(),
                     onTap: (value) {
                       addMention(value, list);
                       showSuggestions.value = false;
