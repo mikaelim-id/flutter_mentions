@@ -29,8 +29,11 @@ class AnnotationEditingController extends TextEditingController {
               // Default markup format for mentions
               if (!mention.disableMarkup) {
                 return mention.markupBuilder != null
-                    ? mention.markupBuilder!(
-                        mention.trigger, mention.id!, mention.display!)
+                    ? mention.textDisplay != null
+                        ? mention.markupBuilder!(
+                            mention.trigger, mention.id!, mention.textDisplay!)
+                        : mention.markupBuilder!(
+                            mention.trigger, mention.id!, mention.display!)
                     : '${mention.trigger}[__${mention.id}__](__${mention.display}__)';
               } else {
                 return match[0]!;
@@ -55,7 +58,8 @@ class AnnotationEditingController extends TextEditingController {
   }
 
   @override
-  TextSpan buildTextSpan({BuildContext? context, TextStyle? style, bool? withComposing}) {
+  TextSpan buildTextSpan(
+      {BuildContext? context, TextStyle? style, bool? withComposing}) {
     var children = <InlineSpan>[];
 
     if (_pattern == null || _pattern == '()') {

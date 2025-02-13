@@ -58,6 +58,7 @@ class Annotation {
     this.style,
     this.id,
     this.display,
+    this.textDisplay,
     this.disableMarkup = false,
     this.markupBuilder,
   });
@@ -65,6 +66,7 @@ class Annotation {
   TextStyle? style;
   String? id;
   String? display;
+  String? textDisplay;
   String trigger;
   bool disableMarkup;
   final String Function(String trigger, String mention, String value)?
