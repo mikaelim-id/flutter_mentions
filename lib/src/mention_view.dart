@@ -267,7 +267,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
     // Loop over all the mention items and generate a suggestions matching list
     widget.mentions.forEach((element) {
-      // if matchAll is set to true add a general regex patteren to match with
+      // if matchAll is set to true add a general regex pattern to match with
       if (element.matchAll) {
         data['${element.trigger}([A-Za-z0-9])*'] = Annotation(
           style: element.style,
@@ -280,23 +280,33 @@ class FlutterMentionsState extends State<FlutterMentions> {
       }
 
       element.data.forEach(
-        (e) => data["${element.trigger}${e['display']}"] = e['style'] != null
-            ? Annotation(
-                style: e['style'],
-                id: e['id'],
-                display: e['display'],
-                trigger: element.trigger,
-                disableMarkup: element.disableMarkup,
-                markupBuilder: element.markupBuilder,
-              )
-            : Annotation(
-                style: element.style,
-                id: e['id'],
-                display: e['display'],
-                trigger: element.trigger,
-                disableMarkup: element.disableMarkup,
-                markupBuilder: element.markupBuilder,
-              ),
+        (e) =>
+            data["${element.trigger}${e['text_display']}"] = e['style'] != null
+                ? Annotation(
+                    style: e['style'],
+                    id: e['id'],
+                    display: e['text_display'],
+                    trigger: element.trigger,
+                    disableMarkup: element.disableMarkup,
+                    markupBuilder: element.markupBuilder,
+                  )
+                : data["${element.trigger}${e['display']}"] = e['style'] != null
+                    ? Annotation(
+                        style: e['style'],
+                        id: e['id'],
+                        display: e['display'],
+                        trigger: element.trigger,
+                        disableMarkup: element.disableMarkup,
+                        markupBuilder: element.markupBuilder,
+                      )
+                    : Annotation(
+                        style: element.style,
+                        id: e['id'],
+                        display: e['display'],
+                        trigger: element.trigger,
+                        disableMarkup: element.disableMarkup,
+                        markupBuilder: element.markupBuilder,
+                      ),
       );
     });
 
