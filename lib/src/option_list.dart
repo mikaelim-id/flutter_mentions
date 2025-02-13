@@ -44,9 +44,11 @@ class OptionList extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () {
-                    onTap(data[index]);
-                  },
+                  onTap: data[index]['id'] != '@all'
+                      ? () {
+                          onTap(data[index]);
+                        }
+                      : null,
                   child: suggestionBuilder != null
                       ? suggestionBuilder!(data[index])
                       : Container(
@@ -55,7 +57,8 @@ class OptionList extends StatelessWidget {
                               horizontal: 20, vertical: 10),
                           child: Row(
                             children: [
-                              imageBuilder != null
+                              imageBuilder != null &&
+                                      data[index]['id'] != '@all'
                                   ? imageBuilder!(data[index]['image_url'],
                                       data[index]['initial'])
                                   : SizedBox(),
