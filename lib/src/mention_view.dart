@@ -286,6 +286,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
                     style: e['style'],
                     id: e['id'],
                     display: e['text_display'],
+                    textDisplay: e['text_display'],
                     trigger: element.trigger,
                     disableMarkup: element.disableMarkup,
                     markupBuilder: element.markupBuilder,
