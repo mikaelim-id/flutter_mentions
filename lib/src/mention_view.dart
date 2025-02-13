@@ -280,34 +280,23 @@ class FlutterMentionsState extends State<FlutterMentions> {
       }
 
       element.data.forEach(
-        (e) =>
-            data["${element.trigger}${e['text_display']}"] = e['style'] != null
-                ? Annotation(
-                    style: e['style'],
-                    id: e['id'],
-                    display: e['text_display'],
-                    textDisplay: e['text_display'],
-                    trigger: element.trigger,
-                    disableMarkup: element.disableMarkup,
-                    markupBuilder: element.markupBuilder,
-                  )
-                : data["${element.trigger}${e['display']}"] = e['style'] != null
-                    ? Annotation(
-                        style: e['style'],
-                        id: e['id'],
-                        display: e['display'],
-                        trigger: element.trigger,
-                        disableMarkup: element.disableMarkup,
-                        markupBuilder: element.markupBuilder,
-                      )
-                    : Annotation(
-                        style: element.style,
-                        id: e['id'],
-                        display: e['display'],
-                        trigger: element.trigger,
-                        disableMarkup: element.disableMarkup,
-                        markupBuilder: element.markupBuilder,
-                      ),
+        (e) => data["${element.trigger}${e['display']}"] = e['style'] != null
+            ? Annotation(
+                style: e['style'],
+                id: e['id'],
+                display: e['display'],
+                trigger: element.trigger,
+                disableMarkup: element.disableMarkup,
+                markupBuilder: element.markupBuilder,
+              )
+            : Annotation(
+                style: element.style,
+                id: e['id'],
+                display: e['display'],
+                trigger: element.trigger,
+                disableMarkup: element.disableMarkup,
+                markupBuilder: element.markupBuilder,
+              ),
       );
     });
 
@@ -328,7 +317,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     controller!.text = controller!.value.text.replaceRange(
       selectedMention.start,
       selectedMention.end,
-      "${_list.trigger}${value['text_display']}${widget.appendSpaceOnAdd ? ' ' : ''}",
+      "${_list.trigger}${value['display']}${widget.appendSpaceOnAdd ? ' ' : ''}",
     );
 
     if (widget.onMentionAdd != null) widget.onMentionAdd!(value);
